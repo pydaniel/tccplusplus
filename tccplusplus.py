@@ -27,3 +27,5 @@ def listar_aplicativos():
                     lista_de_aplicativos.append((idx, nome_do_aplicativo, bundle_id))
 
 print("Lista de Aplicativos:")
+for idx, nome_do_aplicativo, obter_bundle_id in listar_aplicativos:
+    print(f"{idx}. Aplicativo: {nome_do_aplicativo} - Bundle ID: {obter_bundle_id}")
