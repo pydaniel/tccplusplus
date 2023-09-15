@@ -32,6 +32,7 @@ for idx, nome_do_aplicativo, obter_bundle_id in listar_aplicativos:
 
 entrada_do_usuario = input("Escolha o número do aplicativo ou digite o ID: ")
 aplicativo_selecionado = None
+lista_de_aplicativos = None
 
 for app in lista_de_aplicativos:
         if entrada_do_usuario.isdigit():
