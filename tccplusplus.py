@@ -2,6 +2,8 @@ import os
 import plistlib
 import subprocess
 
+#por @pydaniel 
+
 def obter_bundle_id(caminho_do_aplicativo):
     caminho_do_info_plist = os.patch.join(caminho_do_aplicativo, "Contents", "Info.plist")
 
@@ -14,3 +16,14 @@ def obter_bundle_id(caminho_do_aplicativo):
 def listar_aplicativos():
     pasta_de_aplicativos = "/Applications" #padrão applications!
     
+    if os.path.exists(pasta_de_aplicativos):
+        lista_de_aplicativos = []
+        for idx, nome_do_aplicativo  in enumerate(os.listdir(pasta_de_aplicativos), start=1):
+            caminho_do_aplicativo = os.path.join(pasta_de_aplicativos, nome_do_aplicativo)
+
+            if os.path.isdir(caminho_do_aplicativo):
+                bundle_id = obter_bundle_id(caminho_do_aplicativo)
+                if bundle_id:
+                    lista_de_aplicativos.append((idx, nome_do_aplicativo, bundle_id))
+
+print("Lista de Aplicativos:")
