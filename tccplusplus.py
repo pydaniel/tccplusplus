@@ -31,17 +31,53 @@ for idx, nome_do_aplicativo, obter_bundle_id in listar_aplicativos:
     print(f"{idx}. Aplicativo: {nome_do_aplicativo} - Bundle ID: {obter_bundle_id}")
 
 entrada_do_usuario = input("Escolha o número do aplicativo ou digite o ID: ")
-
 aplicativo_selecionado = None
 
-for app in listar_aplicativos:
-    if entrada_do_usuario.isdigit():
-        if int(entrada_do_usuario) == app[0]:
-            aplicativo_selecionado = app
-            break
-    elif entrada_do_usuario == app[2]:
-        aplicativo_selecionado = app
-    break
+for app in lista_de_aplicativos:
+        if entrada_do_usuario.isdigit():
+                if int(entrada_do_usuario) == app[0]:
+                    aplicativo_selecionado = app
+                    break
+        elif entrada_do_usuario == app[2]:
+                aplicativo_selecionado = app
+                break
+
+        if aplicativo_selecionado:
+            print(f"Você escolheu: {aplicativo_selecionado[1]} - Bundle ID: {aplicativo_selecionado[2]}")
+
+            servicos_disponiveis = [
+                "All", "Accessibility", "AddressBook", "AppleEvents", "Calendar", "Camera", "ContactsFull",
+                "ContactsLimited", "DeveloperTool", "Facebook", "LinkedIn", "ListenEvent", "Liverpool", "Location",
+                "MediaLibrary", "Microphone", "Motion", "Photos", "PhotosAdd", "PostEvent", "Reminders",
+                "ScreenCapture", "ShareKit", "SinaWeibo", "Siri", "SpeechRecognition", "SystemPolicyAllFiles",
+                "SystemPolicyDesktopFolder", "SystemPolicyDeveloperFiles", "SystemPolicyDocumentsFolder",
+                "SystemPolicyDownloadsFolder", "SystemPolicyNetworkVolumes", "SystemPolicyRemovableVolumes",
+                "SystemPolicySysAdminFiles", "TencentWeibo", "Twitter", "Ubiquity", "Willow"
+            ]
+
+            print("Serviços disponíveis:")
+            for idx, servico in enumerate(servicos_disponiveis, start=1):
+                print(f"{idx}. {servico}")
+
+            escolhas = input(
+                "Digite o número do serviço que deseja conceder: ")
+            escolhas = escolhas.split(',')
+            escolhas = [int(escolha.strip()) for escolha in escolhas if escolha.strip().isdigit()]
+
+            servicos_selecionados = [servicos_disponiveis[idx - 1] for idx in escolhas if
+                                     1 <= idx <= len(servicos_disponiveis)]
+
+            if servicos_selecionados:
+                comando = f"./tccplus add {' '.join(servicos_selecionados)} {aplicativo_selecionado[2]}"
+                subprocess.run(comando, shell=True)
+                print("Permissões adicionadas com sucesso.")
+            else:
+                print("Nenhuma permissão selecionada.")
+        else:
+            print(
+                "Número de aplicativo ou Bundle ID inválido. Deve escolher um número na lista ou fornecer um Bundle ID válido.")
+else:
+        print("A pasta de aplicativos não foi encontrada.")
 
 
 if __name__ == "__main__":
