@@ -29,3 +29,20 @@ def listar_aplicativos():
 print("Lista de Aplicativos:")
 for idx, nome_do_aplicativo, obter_bundle_id in listar_aplicativos:
     print(f"{idx}. Aplicativo: {nome_do_aplicativo} - Bundle ID: {obter_bundle_id}")
+
+entrada_do_usuario = input("Escolha o número do aplicativo ou digite o ID: ")
+
+aplicativo_selecionado = None
+
+for app in listar_aplicativos:
+    if entrada_do_usuario.isdigit():
+        if int(entrada_do_usuario) == app[0]:
+            aplicativo_selecionado = app
+            break
+    elif entrada_do_usuario == app[2]:
+        aplicativo_selecionado = app
+    break
+
+
+if __name__ == "__main__":
+    listar_aplicativos()
