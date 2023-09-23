@@ -11,6 +11,8 @@ Requer que SIP e AMFI estejam desativados!
 
 Necessário:
 ***sudo chmod +x executar.command***
+***sudo chmod +x ./tccplus***
+
 
 
 
